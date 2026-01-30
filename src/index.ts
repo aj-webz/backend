@@ -1,21 +1,25 @@
 import { Hono } from "hono";
 import { todos } from "./store/todo.store.js";
+import  type { Todo,TodoStatus } from "./types/todo.types.js";
 
 const routes = new Hono();
+
 
 routes.get("/", (c) => {
   return c.json(todos);
 });
 
+
 routes.post("/", async (c) => {
-  const data = await c.req.json();
+  const data = await c.req.json<Todo>();
   todos.push(data);
   return c.json(data, 201);
 });
 
+
 routes.patch("/:id/status", async (c) => {
   const { id } = c.req.param();
-  const body = await c.req.json();
+  const body = await c.req.json<{ status: TodoStatus }>();
 
   const todo = todos.find((t) => t.id === id);
   if (!todo) {
@@ -27,6 +31,7 @@ routes.patch("/:id/status", async (c) => {
 
   return c.json(todo);
 });
+
 
 routes.delete("/:id", (c) => {
   const { id } = c.req.param();
