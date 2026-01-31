@@ -8,7 +8,7 @@ const routes = new Hono();
 routes.use(
   "*",
   cors({
-    origin: "https://worktracker-tau.vercel.app",
+    origin: "https://worktracker-kkcuh82ly-ajaay-s-projects.vercel.app",
     allowMethods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
     allowHeaders: ["Content-Type"],
   })
