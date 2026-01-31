@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 import { todos } from "./store/todo.store.js";
-import  type { Todo,TodoStatus } from "./types/todo.types.js";
+import type { Todo, TodoStatus } from "./types/todo.types.js";
 import { cors } from "hono/cors";
 
 
@@ -8,11 +8,13 @@ const routes = new Hono();
 routes.use(
   "*",
   cors({
-    origin: "https://worktracker-kkcuh82ly-ajaay-s-projects.vercel.app",
+    origin: "https://worktracker-tau.vercel.app",
     allowMethods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
-    allowHeaders: ["Content-Type"],
+    allowHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
   })
 );
+
 
 
 routes.get("/", (c) => {
